@@ -36,3 +36,35 @@ cd AwesomeProject
 ```
 react-native run-ios
 ```
+Once Simulator and Atom has finished loading.  Open the index.ios.js file for editing.
+
+## Using Props
+
+Props are used in the same way as regular React
+
+```
+import React, { Component } from 'react';
+import { AppRegistry, Text, View } from 'react-native';
+
+class Greeting extends Component {
+  render() {
+    return (
+      <Text>Hello {this.props.name}!</Text>
+    );
+  }
+}
+
+class LotsOfGreetings extends Component {
+  render() {
+    return (
+      <View style={{alignItems: 'center'}}>
+        <Greeting name='Matthew' />
+        <Greeting name='Sandy' />
+        <Greeting name='Julie' />
+      </View>
+      );
+}
+}
+
+AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
+```
