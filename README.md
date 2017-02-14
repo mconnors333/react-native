@@ -62,8 +62,8 @@ class LotsOfGreetings extends Component {
         <Greeting name='Sandy' />
         <Greeting name='Julie' />
       </View>
-      );
-}
+    );
+  }
 }
 
 AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
