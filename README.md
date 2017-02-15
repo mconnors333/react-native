@@ -362,11 +362,11 @@ AppRegistry.registerComponent(
   'AwesomeProject',
   () => IScrolledDownAndWhatHappenedNextShockedMe);
 ```
-```
+
 <center>
 <img src='/img/ScrollView.png)'>
 </center>
-```
+
 ## ListView
 
 The ListView component displays a vertically scrolling list of changing, but similarly structured, data.
