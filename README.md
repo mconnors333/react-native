@@ -271,7 +271,7 @@ class AlignItemsBasics extends Component {
 
 AppRegistry.registerComponent('AwesomeProject', () => AlignItemsBasics);
 ```
-(/img/align.png "Title")
+![Align](/img/AlignItems.png)
 
 ## Handling Text Input
 
