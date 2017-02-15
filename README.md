@@ -7,7 +7,7 @@ React Native lets you build mobile apps using only JavaScript. It uses the same 
 
 ## Where to Begin
 
-First we are going to ensure our Node and Watchman are up-to-date by running the following.
+First we are going to ensure our Node and Watchman are installed by running the following.
 
 ```
 brew install node
@@ -357,4 +357,189 @@ class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
 AppRegistry.registerComponent(
   'AwesomeProject',
   () => IScrolledDownAndWhatHappenedNextShockedMe);
+```
+
+## ListView
+
+The ListView component displays a vertically scrolling list of changing, but similarly structured, data.
+
+ListView works well for long lists of data, where the number of items might change over time. Unlike the more generic ScrollView, the ListView only renders elements that are currently showing on the screen, not all the elements at once.
+
+The ListView component requires two props: dataSource and renderRow. dataSource is the source of information for the list. renderRow takes one item from the source and returns a formatted component to render.
+
+```
+import React, { Component } from 'react';
+import { AppRegistry, ListView, Text, View } from 'react-native';
+
+class ListViewBasics extends Component {
+  // Initialize the hardcoded data
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows([
+        'John', 'Joel', 'James', 'Jimmy', 'Jackson', 'Jillian', 'Julie', 'Devin'
+      ])
+    };
+  }
+  render() {
+    return (
+      <View style={{flex: 1, paddingTop: 22}}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData}</Text>}
+        />
+      </View>
+    );
+  }
+}
+
+// App registration and rendering
+AppRegistry.registerComponent('ListViewBasics', () => ListViewBasics);
+```
+
+## Networking
+
+Many mobile apps need to load resources from a remote URL. You may want to make a POST request to a REST API, or you may simply need to fetch a chunk of static content from another server.
+
+### Using Fetch
+
+React Native provides the Fetch API for your networking needs. Learn how to implement it below.
+
+#### Making a Request
+
+```
+fetch('https://mywebsite.com/endpoint/', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstParam: 'yourValue',
+    secondParam: 'yourOtherValue',
+  })
+})
+```
+
+#### Handling the response
+
+```
+function getMoviesFromApiAsync() {
+  return fetch('https://facebook.github.io/react-native/movies.json')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson.movies;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+```
+
+### WebSocket
+
+React Native also supports WebSockets, a protocol which provides full-duplex communication channels over a single TCP connection.
+
+```
+var ws = new WebSocket('ws://host.com/path');
+
+ws.onopen = () => {
+  // connection opened
+
+  ws.send('something'); // send a message
+};
+
+ws.onmessage = (e) => {
+  // a message was received
+  console.log(e.data);
+};
+
+ws.onerror = (e) => {
+  // an error occurred
+  console.log(e.message);
+};
+
+ws.onclose = (e) => {
+  // connection closed
+  console.log(e.code, e.reason);
+};
+```
+## Navigators
+
+Mobile apps rarely consist of just one screen. As soon as you add a second screen to your app, you will have to take into consideration how the user will navigate from one screen to the other.
+
+You can use navigators to transition between multiple screens. These transitions can be typical side-to-side animations down a master/detail stack, or vertical modal popups.
+
+See example below
+
+index.ios.js
+```
+import React, { Component } from 'react';
+import { AppRegistry, Navigator } from 'react-native';
+
+import MyScene from './MyScene';
+
+class SimpleNavigationApp extends Component {
+  render() {
+    return (
+      <Navigator
+        initialRoute={{ title: 'My Initial Scene', index: 0 }}
+        renderScene={(route, navigator) =>
+          <MyScene
+            title={route.title}
+
+            // Function to call when a new scene should be displayed
+            onForward={() => {
+              const nextIndex = route.index + 1;
+              navigator.push({
+                title: 'Scene ' + nextIndex,
+                index: nextIndex,
+              });
+            }}
+
+            // Function to call to go back to the previous scene
+            onBack={() => {
+              if (route.index > 0) {
+                navigator.pop();
+              }
+            }}
+          />
+        }
+      />
+    )
+  }
+}
+
+AppRegistry.registerComponent('AwesomeProject', () => SimpleNavigationApp);
+```
+
+MyScene.js
+```
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
+
+export default class MyScene extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Current Scene: {this.props.title}</Text>
+
+        <TouchableHighlight onPress={this.props.onForward}>
+          <Text>Tap me to load the next scene</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.props.onBack}>
+          <Text>Tap me to go back</Text>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+}
+
+MyScene.propTypes = {
+  title: PropTypes.string.isRequired,
+  onForward: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
+};
 ```
