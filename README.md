@@ -271,3 +271,90 @@ class AlignItemsBasics extends Component {
 
 AppRegistry.registerComponent('AwesomeProject', () => AlignItemsBasics);
 ```
+
+## Handling Text Input
+
+TextInput is a basic component that allows the user to enter text. It has an onChangeText prop that takes a function to be called every time the text changed, and an onSubmitEditing prop that takes a function to be called when the text is submitted.
+
+```
+import React, { Component } from 'react';
+import { AppRegistry, Text, TextInput, View } from 'react-native';
+
+class PizzaTranslator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+
+  render() {
+    return (
+      <View style={{padding: 10}}>
+        <TextInput
+          style={{height: 40}}
+          placeholder="Type here to translate!"
+          onChangeText={(text) => this.setState({text})}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
+      </View>
+    );
+  }
+}
+
+AppRegistry.registerComponent('AwesomeProject', () => PizzaTranslator);
+```
+
+## ScrollView
+
+The ScrollView is a generic scrolling container that can host multiple components and views. The scrollable items need not be homogenous, and you can scroll both vertically and horizontally (by setting the horizontal property).
+
+```
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView, Image, Text } from 'react-native'
+
+class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
+  render() {
+      return(
+        <ScrollView>
+          <Text style={{fontSize:96}}>Scroll me plz</Text>
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Text style={{fontSize:96}}>If you like</Text>
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Text style={{fontSize:96}}>Scrolling down</Text>
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Text style={{fontSize:96}}>What's the best</Text>
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Text style={{fontSize:96}}>Framework around?</Text>
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Image source={require('./img/favicon.png')} />
+          <Text style={{fontSize:80}}>React Native</Text>
+        </ScrollView>
+    );
+  }
+}
+
+
+AppRegistry.registerComponent(
+  'AwesomeProject',
+  () => IScrolledDownAndWhatHappenedNextShockedMe);
+```
