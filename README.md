@@ -217,6 +217,8 @@ class FlexDirectionBasics extends Component {
 
 AppRegistry.registerComponent('AwesomeProject', () => FlexDirectionBasics);
 ```
+
+![Direction](/img/FlexDirection.png)
 ### Justify Content
 
 ```
@@ -243,6 +245,7 @@ class JustifyContentBasics extends Component {
 
 AppRegistry.registerComponent('AwesomeProject', () => JustifyContentBasics);
 ```
+![Align](/img/JustifyContent.png)
 ### Align Items
 
 ```
@@ -360,6 +363,8 @@ AppRegistry.registerComponent(
   () => IScrolledDownAndWhatHappenedNextShockedMe);
 ```
 
+![Align](/img/ScrollView.png)
+
 ## ListView
 
 The ListView component displays a vertically scrolling list of changing, but similarly structured, data.
@@ -398,6 +403,7 @@ class ListViewBasics extends Component {
 // App registration and rendering
 AppRegistry.registerComponent('ListViewBasics', () => ListViewBasics);
 ```
+![Align](/img/ListView.png)
 
 ## Networking
 
