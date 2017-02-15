@@ -363,9 +363,7 @@ AppRegistry.registerComponent(
   () => IScrolledDownAndWhatHappenedNextShockedMe);
 ```
 
-<center>
-<img src='/img/ScrollView.png)'>
-</center>
+![Align](/img/ScrollView.png)
 
 ## ListView
 
